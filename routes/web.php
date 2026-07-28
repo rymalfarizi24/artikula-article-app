@@ -14,11 +14,8 @@ use App\Livewire\Pages\Dashboard\Posts\Show as ShowPost;
 use App\Livewire\Pages\Home;
 use App\Livewire\Pages\SignIn;
 use App\Livewire\Pages\SignUp;
-use App\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Benchmark;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
@@ -51,14 +48,3 @@ Route::get('/admin/dashboard', DashboardHome::class)
     ->defaults('scope', 'global')
     ->middleware(IsAdmin::class)
     ->name('admin.dashboard');
-
-Route::get('/removeAll', function () {
-    Cache::flush();
-});
-
-Route::get('/benchmark', function () {
-    return Benchmark::dd([
-        'db' => fn() => Post::all(),
-        'cache' => fn() => Cache::remember('posts', '120', fn() => Post::all())
-    ], 1);
-});

@@ -12,7 +12,6 @@
                 @else
                     {{ $selectedYear2 }}
                 @endif
-                {{-- {{ $selectedYear1 != $selectedYear2 ? $selectedYear1 : '' }}{{ $selectedYear2 != $selectedYear1 && $selectedYear1 ? ' & ' . $selectedYear2 : $selectedYear2 }} --}}
             </p>
         </div>
 
