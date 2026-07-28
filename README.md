@@ -257,4 +257,5 @@ Electrical Engineering Graduate
 Diponegoro University
 
 LinkedIn: https://www.linkedin.com/in/rayhan-m-alfarizi/
+
 GitHub: https://github.com/Letsgobois24
