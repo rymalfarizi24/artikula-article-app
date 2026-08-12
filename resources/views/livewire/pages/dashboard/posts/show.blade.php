@@ -6,16 +6,14 @@
                 class="mx-auto w-full max-w-5xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
                 <div class="flex space-x-2 mb-2">
                     {{-- Back --}}
-                    <a wire:navigate href="/dashboard/posts"
-                        class="inline-flex items-center px-4 py-2 text-sm font-medium
+                    <a wire:navigate href="/dashboard/posts" class="inline-flex items-center px-4 py-2 text-sm font-medium
                   text-gray-700 border border-gray-300 rounded-lg
                   hover:bg-gray-100 transition">
                         &laquo; Back
                     </a>
 
                     {{-- Edit --}}
-                    <a wire:navigate href="/dashboard/posts/{{ $post->slug }}/edit"
-                        class="inline-flex items-center gap-x-1 px-4 py-2 text-sm font-medium
+                    <a wire:navigate href="/dashboard/posts/{{ $post->slug }}/edit" class="inline-flex items-center gap-x-1 px-4 py-2 text-sm font-medium
               text-white bg-blue-600 rounded-lg
               hover:bg-blue-700 transition">
                         <x-icons.pen size='20' />
@@ -36,9 +34,9 @@
                     {{ $post->title }}
                 </h1>
                 {{-- Body Image --}}
-                @if ($post->image)
-                    <img class="w-xl max-h-96 my-6 mx-auto object-cover"
-                        src="{{ getImage('post-images/' . $post->image) }}" alt="{{ $post->title . ' Post Image' }}">
+                @if ($imgPath)
+                <img class="w-xl max-h-96 my-6 mx-auto object-cover" src="{{ $imgPath }}"
+                    alt="{{ $post->title . ' Post Image' }}">
                 @endif
                 {{-- Body Text --}}
                 <div>

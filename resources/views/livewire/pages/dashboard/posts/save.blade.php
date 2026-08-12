@@ -1,6 +1,7 @@
 <div>
     <x-title>{{ $isEdit ? 'Edit Post' : 'Create New Post' }}</x-title>
-    <form wire:submit.prevent='save' class="max-w-full grid md:grid-cols-2 gap-x-4 gap-y-2 pb-4" x-data="{ title: @entangle('title'), slug: @entangle('slug') }">
+    <form wire:submit.prevent='save' class="max-w-full grid md:grid-cols-2 gap-x-4 gap-y-2 pb-4"
+        x-data="{ title: @entangle('title'), slug: @entangle('slug') }">
         @csrf
         {{-- Title --}}
         <x-form.input name="title" label="Title" :autofocus='true' type='text' class='col-span-full' />
@@ -14,14 +15,13 @@
         <div x-data="imagePreview()" class="col-span-full">
             <img x-show="imageUrl" :src="imageUrl" class="mb-3 mx-auto max-w-xl object-cover max-h-96">
             <label class="block mb-2.5 text-sm font-medium text-heading" for="image">Post Image</label>
-            <input @change="previewImage" wire:model='image' name="image" id="image" type="file"
-                accept="image/*"
+            <input @change="previewImage" wire:model='image' name="image" id="image" type="file" accept="image/*"
                 class="cursor-pointer bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 block w-full shadow-xs placeholder:text-body">
             <p class="@error('image') text-xs text-red-600 @else text-sm text-gray-500 @enderror mt-0.5 h-4">
                 @error('image')
-                    {{ $message }}
+                {{ $message }}
                 @else
-                    JPG, JPEG, PNG, BMP, GIF, or WEBP (MAX. 1 MB).
+                JPG, JPEG, PNG, BMP, GIF, or WEBP (MAX. 1 MB).
                 @enderror
             </p>
         </div>
@@ -33,12 +33,11 @@
             <trix-editor input="body" x-data x-init="$nextTick(() => {
                 const editor = $el.editor;
                 editor.loadHTML(@js($body));
-            })"
-                x-on:trix-change="$wire.set('body', $event.target.value)"></trix-editor>
+            })" x-on:trix-change="$wire.set('body', $event.target.value)"></trix-editor>
         </div>
         <p class="text-xs text-red-600 h-4">
             @error('body')
-                {{ $message }}
+            {{ $message }}
             @enderror
         </p>
 
@@ -51,7 +50,7 @@
 <script>
     function imagePreview() {
         return {
-            imageUrl: @js(isset($lastImage) ? getImage('post-images/' . $lastImage) : null),
+            imageUrl: @js(isset($imgPath) ? $imgPath : null),
             previewImage(e) {
                 const file = e.target.files[0];
                 if (file) {

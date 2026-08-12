@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Dashboard\Posts;
 
 use App\Models\Post;
 use App\Services\PostService;
+use App\Support\SupabaseStorage;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -14,10 +15,12 @@ use Livewire\Component;
 class Show extends Component
 {
     public $post;
+    public string | null $imgPath = null;
 
     public function mount(Post $post)
     {
         $this->post = $post;
+        $this->imgPath = $post->image ? SupabaseStorage::disk('post-image')->url($post->image) : null;
     }
 
     public function render()

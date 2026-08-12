@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Post;
+use App\Support\SupabaseStorage;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class PostService
@@ -16,10 +17,9 @@ class PostService
         }
 
         if ($post->image) {
-            $storage = new SupabaseStorageService;
-            $response = $storage->delete($post->image);
+            $response = SupabaseStorage::disk('post-image')->delete($post->image);
 
-            if ($response->failed()) {
+            if (!$response) {
                 return false;
             }
         }
@@ -31,15 +31,12 @@ class PostService
     public function createPost($data, TemporaryUploadedFile $image): bool
     {
         if ($image) {
-            $storage = new SupabaseStorageService;
-
-            $fileName = $image->hashName();
-            $response = $storage->upload($fileName, $image->get(), $image->getMimeType());
-            if ($response->failed()) {
+            $path = SupabaseStorage::disk('post-image')->putFile('', $image, 'public');
+            if (!$path) {
                 return false;
             }
 
-            $data['image'] = $fileName;
+            $data['image'] = $path;
         }
 
         $data['author_id'] = auth()->user()->id;
@@ -48,28 +45,26 @@ class PostService
         return true;
     }
 
-    public function editPost(int $id, $data, TemporaryUploadedFile | null $image, string | null $lastImage): bool
+    public function editPost(int $id, array $data, TemporaryUploadedFile | null $image, string | null $lastImage): bool
     {
         if ($image instanceof TemporaryUploadedFile) {
-            $storage = new SupabaseStorageService;
             if ($lastImage) {
                 // Delete object
-                $deleteResponse = $storage->delete($lastImage);
+                $deleteResponse = SupabaseStorage::disk('post-image')->delete($lastImage);
 
-                if ($deleteResponse->failed()) {
+                if (!$deleteResponse) {
                     return false;
                 }
             }
 
             // Upload Image
-            $newFileName = $image->hashName();
-            $uploadResponse = $storage->upload($newFileName, $image->get(), $image->getMimeType());
+            $path = SupabaseStorage::disk('post-image')->putFile('', $image, 'public');
 
-            if ($uploadResponse->failed()) {
+            if (!$path) {
                 return false;
             }
 
-            $data['image'] = $newFileName;
+            $data['image'] = $path;
         } else {
             unset($data['image']);
         }

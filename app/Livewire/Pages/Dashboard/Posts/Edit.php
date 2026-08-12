@@ -5,6 +5,7 @@ namespace App\Livewire\Pages\Dashboard\Posts;
 use App\Models\Post;
 use App\Services\CategoryService;
 use App\Services\PostService;
+use App\Support\SupabaseStorage;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -18,12 +19,13 @@ class Edit extends Component
 {
     use WithFileUploads;
 
-    public $title = '';
-    public $slug = '';
-    public $category_id = null;
+    public string $title = '';
+    public string $slug = '';
+    public ?int $category_id = null;
     public $image = null;
-    public $lastImage = null;
-    public $body = '';
+    public ?string $lastImage = null;
+    public ?string $imgPath = null;
+    public string $body = '';
     public $post_id = null;
 
     public function mount(Post $post)
@@ -32,6 +34,7 @@ class Edit extends Component
         $this->slug = $post['slug'];
         $this->category_id = $post['category_id'];
         $this->lastImage = $post['image'] ?? null;
+        $this->imgPath = $this->lastImage ? SupabaseStorage::disk('post-image')->url($this->lastImage) : null;
         $this->body = $post['body'];
         $this->post_id = $post['id'];
     }
