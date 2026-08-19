@@ -11,8 +11,8 @@ use App\Livewire\Pages\Dashboard\Posts\Create as CreatePost;
 use App\Livewire\Pages\Dashboard\Posts\Edit as EditPost;
 use App\Livewire\Pages\Dashboard\Posts\Index as DashboardPost;
 use App\Livewire\Pages\Dashboard\Posts\Show as ShowPost;
+use App\Livewire\Pages\Dashboard\Profile;
 use App\Livewire\Pages\Home;
-use App\Livewire\Pages\Profile;
 use App\Livewire\Pages\SignIn;
 use App\Livewire\Pages\SignUp;
 use Illuminate\Http\Request;
@@ -24,7 +24,6 @@ Route::get('/about', About::class)->name('about');
 Route::get('/blogs', Blogs::class)->name('blogs');
 Route::get('/blog/{post:slug}', Blog::class)->name('blog');
 Route::get('/contact', Contact::class)->name('contact');
-Route::get('/profile', Profile::class)->name('profile')->middleware('auth');
 
 // Authentication
 Route::get('/sign-in', SignIn::class)->name('login')->middleware('guest');
@@ -36,8 +35,9 @@ Route::post('/sign-out', function (Request $request) {
     return redirect('/');
 });
 
+Route::get('/profile', Profile::class)->middleware('auth')->name('profile');
 Route::get('/dashboard', DashboardHome::class)
-    ->defaults('scope', 'user')
+->defaults('scope', 'user')
     ->middleware('auth');
 
 Route::get('/dashboard/posts', DashboardPost::class)->middleware('auth')->name('posts-dashboard');

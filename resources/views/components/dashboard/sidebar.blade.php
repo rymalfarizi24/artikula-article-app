@@ -15,9 +15,17 @@
         {{-- Sidelink --}}
         <ul class="nav-list space-y-2 py-6">
             <li>
+                <x-dashboard.link :navigate="true" href="/profile">
+                    <x-slot:icon>
+                        <x-icons.profile size='26' />
+                    </x-slot:icon>
+                    My Profile
+                </x-dashboard.link>
+            </li>
+            <li>
                 <x-dashboard.link :navigate="false" href="/dashboard">
                     <x-slot:icon>
-                        <x-icons.dashboard size='24' />
+                        <x-icons.dashboard size='26' />
                     </x-slot:icon>
                     Dashboard
                 </x-dashboard.link>
@@ -25,7 +33,7 @@
             <li>
                 <x-dashboard.link href="/dashboard/posts" routeActive="dashboard/posts*">
                     <x-slot:icon>
-                        <x-icons.post size='24' />
+                        <x-icons.post size='26' />
                     </x-slot:icon>
                     My Posts
                 </x-dashboard.link>
@@ -33,35 +41,34 @@
         </ul>
 
         @can('admin')
-            <hr class="border-gray-300">
-            <div class="py-6">
-                <h5 class="px-2 mb-2 text-sm font-medium tracking-wider text-gray-400 uppercase">
-                    Administration
-                </h5>
-                <ul class="nav-list">
-                    <li>
-                        <x-dashboard.link :navigate="false" href="/admin/dashboard">
-                            <x-slot:icon>
-                                <x-icons.admin-site size='24' />
-                            </x-slot:icon>
-                            Dashboard
-                        </x-dashboard.link>
-                    </li>
-                    <li>
-                        <x-dashboard.link href="/dashboard/categories">
-                            <x-slot:icon>
-                                <x-icons.category size='24' />
-                            </x-slot:icon>
-                            Category
-                        </x-dashboard.link>
-                    </li>
-                </ul>
-            </div>
+        <hr class="border-gray-300">
+        <div class="py-6">
+            <h5 class="px-2 mb-2 text-sm font-medium tracking-wider text-gray-400 uppercase">
+                Administration
+            </h5>
+            <ul class="nav-list">
+                <li>
+                    <x-dashboard.link :navigate="false" href="/admin/dashboard">
+                        <x-slot:icon>
+                            <x-icons.admin-site size='26' />
+                        </x-slot:icon>
+                        Dashboard
+                    </x-dashboard.link>
+                </li>
+                <li>
+                    <x-dashboard.link href="/dashboard/categories">
+                        <x-slot:icon>
+                            <x-icons.category size='26' />
+                        </x-slot:icon>
+                        Category
+                    </x-dashboard.link>
+                </li>
+            </ul>
+        </div>
         @endcan
 
         {{-- Home Button --}}
-        <a href="/"
-            class="mt-auto mb-8 flex items-center justify-center gap-2 rounded-lg
+        <a href="/" class="mt-auto mb-8 flex items-center justify-center gap-2 rounded-lg
                        border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700
                        hover:bg-gray-50 transition">
             <x-icons.home size="18" />

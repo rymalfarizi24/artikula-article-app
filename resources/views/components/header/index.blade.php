@@ -1,5 +1,4 @@
 <nav class="bg-gray-900 text-gray-100" x-data="{ isOpen: false }">
-    {{-- Ketika layar medium --}}
     <div class="flex items-center justify-between p-5 lg:px-8">
         {{-- Logo --}}
         <div class="flex md:flex-1">
@@ -17,41 +16,41 @@
 
         <div class="hidden md:flex md:flex-1 md:justify-end md:items-center">
             @auth
-                {{-- Profile --}}
-                <div @click="isOpen = !isOpen" class="flex items-center mr-6 relative cursor-pointer group">
-                    <span class="text-sm">{{ auth()->user()->username }}</span>
-                    <div class="ml-3 mr-0.5 h-9 w-9 overflow-hidden rounded-full group-focus:ring-2" type="button">
-                        <img src="{{ asset('img/person-logo.png') }}" alt="my-logo" />
-                    </div>
-                    <x-icons.dropdown-line size="20" />
-
-                    <!-- Dropdown menu -->
-                    <div x-show="isOpen" x-on:click.outside="isOpen = false" x-cloak
-                        x-transition:enter="transition ease-out duration-200 origin-top-right"
-                        x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
-                        x-transition:leave="transition ease-in duration-200 origin-top-right"
-                        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                        class="absolute md:block hidden bg-slate-100 top-11 right-0 rounded-md z-10 w-44 border shadow-lg">
-                        <ul class="text-body p-2 text-sm font-medium nav-list">
-                            <li class="hover:bg-gray-200">
-                                <a href="/dashboard" class="inline-flex w-full items-center rounded p-2">My Dashboard</a>
-                            </li>
-                            <li class="hover:bg-gray-200">
-                                <a href="/profile" class="inline-flex w-full items-center rounded p-2">My Profile</a>
-                            </li>
-                            <hr class="h-2 text-gray-300">
-                            <li class="hover:bg-gray-200 rounded-md">
-                                <x-header.sign-out-button />
-                            </li>
-                        </ul>
-                    </div>
+            {{-- Profile --}}
+            <div @click="isOpen = !isOpen" class="flex items-center mr-6 relative cursor-pointer group">
+                <span class="text-sm">{{ auth()->user()->username }}</span>
+                <div class="ml-3 mr-0.5 h-9 w-9 overflow-hidden rounded-full group-focus:ring-2" type="button">
+                    <img src="{{ asset('img/person-logo.png') }}" alt="my-logo" />
                 </div>
-                {{-- Login --}}
+                <x-icons.dropdown-line size="20" />
+
+                <!-- Dropdown menu -->
+                <div x-show="isOpen" x-on:click.outside="isOpen = false" x-cloak
+                    x-transition:enter="transition ease-out duration-200 origin-top-right"
+                    x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-200 origin-top-right"
+                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                    class="absolute md:block hidden bg-slate-100 top-11 right-0 rounded-md z-10 w-44 border shadow-lg">
+                    <ul class="text-body p-2 text-sm font-medium nav-list">
+                        <li class="hover:bg-gray-200">
+                            <a href="/dashboard" class="inline-flex w-full items-center rounded p-2">My Dashboard</a>
+                        </li>
+                        <li class="hover:bg-gray-200">
+                            <a href="/profile" class="inline-flex w-full items-center rounded p-2">My Profile</a>
+                        </li>
+                        <hr class="h-2 text-gray-300">
+                        <li class="hover:bg-gray-200 rounded-md">
+                            <x-header.sign-out-button />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {{-- Login --}}
             @else
-                <a href="/sign-in" class="md:inline-flex items-center hidden font-semibold group text-sm">Sign
-                    in
-                    <x-icons.arrow size='15' class="group-hover:translate-x-1 inline-block transition ml-1" />
-                </a>
+            <a href="/sign-in" class="md:inline-flex items-center hidden font-semibold group text-sm">Sign
+                in
+                <x-icons.arrow size='15' class="group-hover:translate-x-1 inline-block transition ml-1" />
+            </a>
             @endauth
         </div>
 
@@ -88,36 +87,38 @@
                     <x-header.sidelink href="/contact" :active="request()->is('contact')">Contact</x-header.sidelink>
                 </div>
                 @auth
-                    <div class="py-6">
-                        <!-- Profile Image -->
-                        <div class="flex space-x-5">
-                            <div class="h-12 w-12 overflow-hidden rounded-full ring-2">
-                                <img src="/img/person-logo.png" alt="my-logo" />
-                            </div>
-                            <div class="">
-                                <h5 class="text-gray-900">{{ auth()->user()->username }}</h5>
-                                <p class="text-sm text-gray-500">{{ auth()->user()->email }}</p>
-                            </div>
+                <div class="py-6">
+                    <!-- Profile Image -->
+                    <div class="flex space-x-5">
+                        <div class="h-12 w-12 overflow-hidden rounded-full ring-2">
+                            <img src="/img/person-logo.png" alt="my-logo" />
                         </div>
-                        <!-- Profile Navigation -->
-                        <div class="space-y-2 mt-6">
-                            <x-header.sidelink href="/dashboard" :active="request()->is('dashoard')">My Dashboard</x-header.sidelink>
-                            <x-header.sidelink href="/profile" :active="request()->is('profile')">My Profile</x-header.sidelink>
+                        <div class="">
+                            <h5 class="text-gray-900">{{ auth()->user()->username }}</h5>
+                            <p class="text-sm text-gray-500">{{ auth()->user()->email }}</p>
                         </div>
                     </div>
+                    <!-- Profile Navigation -->
+                    <div class="space-y-2 mt-6">
+                        <x-header.sidelink href="/dashboard" :active="request()->is('dashoard')">My Dashboard
+                        </x-header.sidelink>
+                        <x-header.sidelink href="/profile" :active="request()->is('profile')">My Profile
+                        </x-header.sidelink>
+                    </div>
+                </div>
                 @endauth
                 <div class="py-6">
                     @auth
-                        <form action="/sign-out" method="POST">
-                            @csrf
-                            <button type="submit"
-                                class="w-full flex cursor-pointer text-gray-900 hover:bg-gray-50 -mx-3 rounded-lg px-3 py-2 font-medium">Sign
-                                Out</button>
-                        </form>
+                    <form action="/sign-out" method="POST">
+                        @csrf
+                        <button type="submit"
+                            class="w-full flex cursor-pointer text-gray-900 hover:bg-gray-50 -mx-3 rounded-lg px-3 py-2 font-medium">Sign
+                            Out</button>
+                    </form>
                     @else
-                        <a wire:navigate.hover href="/sign-in"
-                            class="text-gray-900 hover:bg-gray-50 -mx-3 block rounded-lg px-3 py-2 font-medium">Sign
-                            In</a>
+                    <a wire:navigate.hover href="/sign-in"
+                        class="text-gray-900 hover:bg-gray-50 -mx-3 block rounded-lg px-3 py-2 font-medium">Sign
+                        In</a>
                     @endauth
                 </div>
             </div>

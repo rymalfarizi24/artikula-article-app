@@ -34,7 +34,7 @@ class Edit extends Component
         $this->slug = $post['slug'];
         $this->category_id = $post['category_id'];
         $this->lastImage = $post['image'] ?? null;
-        $this->imgPath = $this->lastImage ? SupabaseStorage::disk('post-image')->url($this->lastImage) : null;
+        $this->imgPath = $this->lastImage ? SupabaseStorage::disk('profile-image')->url($this->lastImage) : null;
         $this->body = $post['body'];
         $this->post_id = $post['id'];
     }
