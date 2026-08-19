@@ -1,6 +1,6 @@
 <nav class="top-0 right-0 left-0 bg-gray-900 z-10 text-gray-100">
     {{-- Ketika layar medium --}}
-    <div class="flex items-center justify-between pr-5 py-5">
+    <div class="flex items-center justify-between pr-5 py-4">
         {{-- Logo --}}
         <div class="flex items-center px-5 w-64">
             <x-dashboard.side-button />

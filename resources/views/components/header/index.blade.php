@@ -1,5 +1,5 @@
 <nav class="bg-gray-900 text-gray-100" x-data="{ isOpen: false }">
-    <div class="flex items-center justify-between p-5 lg:px-8">
+    <div class="flex items-center justify-between py-4 px-5 lg:px-8">
         {{-- Logo --}}
         <div class="flex md:flex-1">
             <a href="/" wire:navigate class="-m-1.5 p-1.5">
@@ -17,9 +17,9 @@
         <div class="hidden md:flex md:flex-1 md:justify-end md:items-center">
             @auth
             {{-- Profile --}}
-            <div @click="isOpen = !isOpen" class="flex items-center mr-6 relative cursor-pointer group">
+            <div @click="isOpen = !isOpen" class="flex items-center mr-6 relative cursor-pointer">
                 <span class="text-sm">{{ auth()->user()->username }}</span>
-                <div class="ml-3 mr-0.5 h-9 w-9 overflow-hidden rounded-full group-focus:ring-2" type="button">
+                <div class="ml-3 mr-0.5 h-9 w-9 overflow-hidden rounded-full" type="button">
                     <img src="{{ asset('img/person-logo.png') }}" alt="my-logo" />
                 </div>
                 <x-icons.dropdown-line size="20" />
@@ -39,7 +39,7 @@
                             <a href="/profile" class="inline-flex w-full items-center rounded p-2">My Profile</a>
                         </li>
                         <hr class="h-2 text-gray-300">
-                        <li class="hover:bg-gray-200 rounded-md">
+                        <li class="hover:bg-gray-200 rounded-md group">
                             <x-header.sign-out-button />
                         </li>
                     </ul>
