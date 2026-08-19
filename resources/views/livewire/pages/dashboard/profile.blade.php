@@ -1,4 +1,3 @@
-{{-- resources/views/livewire/profile.blade.php --}}
 <div class="w-full mx-auto">
     <x-title>My Profile</x-title>
 
@@ -7,11 +6,18 @@
         {{-- Kolom Kiri: Foto Profil --}}
         <div class="lg:col-span-1">
             <div
-                class="bg-white border border-default-medium rounded-base p-5 flex flex-col items-center text-center gap-4">
+                class="bg-white border border-default-medium rounded-base py-8 px-4 lg:px-8 flex flex-col items-center text-center gap-4">
                 <div
                     class="-mb-3 relative w-4/5 max-w-52 aspect-square rounded-full object-cover border border-default-medium overflow-hidden">
                     <input wire:model="img" name="img" id="img" type="file" accept="image/*" class="hidden">
-                    <label for="img"
+                    {{-- Loading Indicator --}}
+                    <div wire:loading.flex wire:target='img'
+                        class="flex justify-center items-center bg-black/30 transition absolute w-full h-full cursor-pointer">
+                        <div class="w-10 h-10 border-4 border-gray-300 border-t-slate-600 rounded-full animate-spin">
+                        </div>
+                    </div>
+                    {{-- Label for Image Upload --}}
+                    <label wire:loading.remove.flex wire:target='img' for="img"
                         class="flex justify-center items-center hover:bg-black/30 hover:opacity-100 opacity-0 transition duration-300 absolute w-full h-full cursor-pointer">
                         <x-icons.pen size="50" class="text-slate-300" />
                     </label>
@@ -49,7 +55,7 @@
         </div>
 
         {{-- Kolom Kanan: Detail Profile --}}
-        <div class="bg-white lg:col-span-2 gap-y-5 border-default-medium rounded-base p-8">
+        <div class="bg-white lg:col-span-2 gap-y-5 border-default-medium rounded-base py-8 px-4 lg:px-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {{-- Nama --}}
                 <x-form.input type="text" name="name" placeholder="Your name" label="Name" bg="neutral"
@@ -84,7 +90,7 @@
 
             </div>
 
-            <div class="pt-4 border-t border-default-medium">
+            <div class="mt-4 lg:mt-6 border-t border-default-medium">
                 <x-ui.submit-button target="save,img" class="">
                     Save
                 </x-ui.submit-button>
